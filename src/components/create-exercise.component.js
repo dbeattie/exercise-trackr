@@ -22,7 +22,23 @@ export default class CreateExercise extends Component {
     };
   }
 
-  componentDidMount() {
+  componentDidMount = async () => {
+    // working but doesn't create user exercises
+  
+    // try {
+    //   const response = await axios.get("http://localhost:5000/users/") 
+    //   console.log({response})
+    //   if (response.data.length > 0) {
+    //     this.setState({
+    //       users: response.data.map((user) => user.username),
+    //       username: response.data[0].username,
+    //     });
+    //   }
+    // } catch (error) {
+    //   console.error(error);
+    // }
+
+
     axios
       .get("http://localhost:5000/users/")
       .then((response) => {
