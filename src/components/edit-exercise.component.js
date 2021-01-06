@@ -8,6 +8,12 @@ export default class EditExercise extends Component {
   constructor(props) {
     super(props);
 
+    this.textInput = null;
+
+    this.setTextInputRef = element => {
+      this.textInput = element;
+    };
+
 
     this.onChangeUsername = this.onChangeUsername.bind(this);
     this.onChangeDescription = this.onChangeDescription.bind(this);
@@ -108,7 +114,9 @@ export default class EditExercise extends Component {
         <form onSubmit={this.onSubmit}>
           <div className="form-group"> 
             <label>Username: </label>
-            <select ref="userInput"
+            <select 
+                ref={this.setTextInputRef}
+                // ref="userInput"
                 className="form-control"
                 value={this.state.username}
                 onChange={this.onChangeUsername}>

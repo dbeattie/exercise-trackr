@@ -7,6 +7,12 @@ export default class CreateExercise extends Component {
   constructor(props) {
     super(props);
 
+    this.textInput = null;
+
+    this.setTextInputRef = element => {
+      this.textInput = element;
+    };
+
     this.onChangeUsername = this.onChangeUsername.bind(this);
     this.onChangeDescription = this.onChangeDescription.bind(this);
     this.onChangeDuration = this.onChangeDuration.bind(this);
@@ -75,7 +81,7 @@ export default class CreateExercise extends Component {
     console.log(exercise);
 
     axios
-      .post("[http://localhost:5000/exercises/add", exercise)
+      .post("http://localhost:5000/exercises/add", exercise)
       .then((res) => console.log(res.data));
 
     window.location = "/";
@@ -89,7 +95,8 @@ export default class CreateExercise extends Component {
           <div className="form-group">
             <label>Username: </label>
             <select
-              ref="userInput"
+              ref={this.setTextInputRef}
+              // ref="userInput"
               required
               className="form-control"
               value={this.state.username}
