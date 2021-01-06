@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import axios from 'axios';
+import axios from "axios";
 
 export default class CreateUser extends Component {
   constructor(props) {
@@ -17,7 +17,8 @@ export default class CreateUser extends Component {
       username: e.target.value,
     });
   }
-  onSubmit(e) {
+
+  onSubmit = async (e) => {
     e.preventDefault();
 
     const newUser = {
@@ -25,14 +26,17 @@ export default class CreateUser extends Component {
     };
 
     console.log(newUser);
-
-    axios.post('http://localhost:5000/users/add', newUser)                
-    .then(res => console.log(res.data));
+    try {
+      const res = await axios.post("http://localhost:5000/users/add", newUser);
+      console.log(res.data);
+    } catch (error) {
+      console.error(error);
+    }
 
     this.setState({
       username: "",
     });
-  }
+  };
 
   render() {
     return (
