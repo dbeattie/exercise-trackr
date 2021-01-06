@@ -38,26 +38,20 @@ export default class ExercisesList extends Component {
     } catch (error) {
       console.log(error);
     }
-
-    // axios
-    //   .get("http://localhost:5000/exercises/")
-    //   .then((response) => {
-    //     this.setState({ exercises: response.data });
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
   };
 
-  deleteExercise(id) {
-    axios
-      .delete("http://localhost:5000/exercises/" + id)
-      .then((res) => console.log(res.data));
+  deleteExercise = async (id) => {
+    try {
+      const res = await axios.delete("http://localhost:5000/exercises/" + id);
+      console.log(res.data);
+    } catch (error) {
+      console.log(error);
+    }
 
     this.setState({
       exercises: this.state.exercises.filter((el) => el._id !== id),
     });
-  }
+  };
 
   exerciseList() {
     return this.state.exercises.map((currentexercise) => {
