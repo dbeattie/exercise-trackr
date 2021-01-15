@@ -9,7 +9,7 @@ export default class CreateExercise extends Component {
 
     this.textInput = null;
 
-    this.setTextInputRef = element => {
+    this.setTextInputRef = (element) => {
       this.textInput = element;
     };
 
@@ -28,12 +28,9 @@ export default class CreateExercise extends Component {
     };
   }
 
-  componentDidMount = async() => {
-     // working but doesn't create user exercises
-  
+  componentDidMount = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/users/") 
-      console.log({response})
+      const response = await axios.get("http://localhost:5000/users/");
       if (response.data.length > 0) {
         this.setState({
           users: response.data.map((user) => user.username),
@@ -43,26 +40,11 @@ export default class CreateExercise extends Component {
     } catch (error) {
       console.error(error);
     }
-
-
-    // axios
-    //   .get("http://localhost:5000/users/")
-    //   .then((response) => {
-    //     if (response.data.length > 0) {
-    //       this.setState({
-    //         users: response.data.map((user) => user.username),
-    //         username: response.data[0].username,
-    //       });
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
-  }
+  };
 
   onChangeUsername(e) {
     this.setState({
-      username: e.target.value
+      username: e.target.value,
     });
   }
 
@@ -84,7 +66,7 @@ export default class CreateExercise extends Component {
     });
   }
 
-  onSubmit(e) {
+  onSubmit = async (e) => {
     e.preventDefault();
 
     const exercise = {
@@ -94,14 +76,20 @@ export default class CreateExercise extends Component {
       date: this.state.date,
     };
 
-    console.log(exercise);
+    // console.log({ exercise });
 
-    axios
-      .post("http://localhost:5000/exercises/add", exercise)
-      .then((res) => console.log(res.data));
+    try {
+      const res = await axios.post(
+        "http://localhost:5000/exercises/add",
+        exercise
+      );
+      console.log(res.data);
+    } catch (error) {
+      console.error(error);
+    }
 
     window.location = "/";
-  }
+  };
 
   render() {
     return (
