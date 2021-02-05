@@ -1,67 +1,54 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-export default class CreateUser extends Component {
-  constructor(props) {
-    super(props);
+export default function CreateUser() {
+  const [user, setUser] = useState("");
 
-    this.onChangeUsername = this.onChangeUsername.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
-    this.state = {
-      username: "",
-    };
-  }
+  const onChangeUsername = (e) => {
+    setUser(e);
+  };
 
-  onChangeUsername(e) {
-    this.setState({
-      username: e.target.value,
-    });
-  }
-
-  onSubmit = async (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
 
     const newUser = {
-      username: this.state.username,
+      username: user,
     };
 
-    console.log(newUser);
+    // console.log(newUser);
     try {
       const res = await axios.post("http://localhost:5000/users/add", newUser);
-      console.log(res.data);
+      // console.log(res.data);
     } catch (error) {
       console.error(error);
     }
 
-    this.setState({
-      username: "",
-    });
+    setUser("");
   };
 
-  render() {
-    return (
-      <div>
-        <h3>Create New User</h3>
-        <form onSubmit={this.onSubmit}>
-          <div className="form-group">
-            <label>Username: </label>
-            <input
-              type="text"
-              required
-              className="form-control"
-              value={this.state.username}
-              onChange={this.onChangeUsername}
-            />
-          </div>
-          <div className="form-group">
-            <input
-              type="submit"
-              value="Create User"
-              className="btn btn-primary"
-            />
-          </div>
-        </form>
-      </div>
-    );
-  }
+  // console.log({ user });
+  return (
+    <div>
+      <h3>Create New User</h3>
+      <form onSubmit={onSubmit}>
+        <div className="form-group">
+          <label>Username: </label>
+          <input
+            type="text"
+            required
+            className="form-control"
+            value={user}
+            onChange={e=> onChangeUsername(e.target.value)}
+          />
+        </div>
+        <div className="form-group">
+          <input
+            type="submit"
+            value="Create User"
+            className="btn btn-primary"
+          />
+        </div>
+      </form>
+    </div>
+  );
 }
