@@ -1,24 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-
-// put this into component Excercises
-const Exercise = (props) => {
-   return (
-    <tr>
-      <td>{props.exercise.username}</td>
-      <td>{props.exercise.description}</td>
-      <td>{props.exercise.duration}</td>
-      <td>{props.exercise.date.substring(0, 10)}</td>
-      <td>
-        <Link to={"/edit/" + props.exercise._id}>edit</Link> |{" "}
-        <a href="#" onClick={() => props.deleteExercise(props.exercise._id)}>
-          delete
-        </a>
-      </td>
-    </tr>
-  );
-};
+import Exercise from './exercise.component';
 
 export default function ExercisesList() {
   const [exercises, setExercises] = useState([]);
