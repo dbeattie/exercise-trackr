@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Exercise from './exercise.component';
+import { Table, Thead, Tbody, Tfoot, Tr, Th, TableCaption, Container, Text } from "@chakra-ui/react";
 
 export default function ExercisesList() {
   const [exercises, setExercises] = useState([]);
@@ -46,20 +47,33 @@ export default function ExercisesList() {
   });
 
   return (
-    <div>
-      <h3>Logged Exercises</h3>
-      <table className="table">
-        <thead className="thead-light">
-          <tr>
-            <th>Username</th>
-            <th>Description</th>
-            <th>Duration</th>
-            <th>Date</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>{exerciseList}</tbody>
-      </table>
-    </div>
+    <Container maxW="1040px" mx="auto">
+      <Text fontSize="lg">
+        <Table size="lg" variant="striped" colorScheme="teal">
+          <TableCaption>List of Users and Exercises</TableCaption>
+          <Thead className="thead-light">
+            <Tr>
+              <Th>Username</Th>
+              <Th>Description</Th>
+              <Th>Duration</Th>
+              <Th>Date</Th>
+              <Th>Actions</Th>
+            </Tr>
+          </Thead>
+          <Tbody>
+            {exerciseList}
+          </Tbody>
+          <Tfoot>
+            <Tr>
+              <Th>Username</Th>
+              <Th>Description</Th>
+              <Th>Duration</Th>
+              <Th>Date</Th>
+              <Th>Actions</Th>
+            </Tr>
+          </Tfoot>
+        </Table>
+      </Text>
+    </Container>
   );
 }

@@ -26,7 +26,7 @@ export default function Navbar(props) {
       <Flex align="center" mr={5}>
         <Link to="/" >
           <Heading as="h1" size="lg" letterSpacing={"-.1rem"}>
-            ExcerTracker
+            ExcerciseTrackr
           </Heading>
         </Link>
       </Flex>
