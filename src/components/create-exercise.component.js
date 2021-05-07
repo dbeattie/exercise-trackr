@@ -139,7 +139,7 @@ export default function CreateExercise(props) {
         </div>
         <div className="form-group">
           <FormControl id="date" isRequired>
-            <FormLabel>Duration (in minutes):</FormLabel>
+            <FormLabel>Date:</FormLabel>
             <div>
                 <DatePicker
                   size="md"
@@ -149,6 +149,7 @@ export default function CreateExercise(props) {
             </div>
           </FormControl>
         </div>
+        <br></br>
         <div className="form-group">
           <Button type="submit" colorScheme="teal" variant="outline" className="btn btn-primary">
             Create Exercise Log
