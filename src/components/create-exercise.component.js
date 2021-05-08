@@ -1,6 +1,22 @@
 import React, { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
-// import "react-datepicker/dist/react-datepicker.css";
+import "react-datepicker/dist/react-datepicker.css";
+import {
+  Heading,
+  Input,
+  FormControl,
+  FormLabel,
+  FormErrorMessage,
+  FormHelperText,
+  NumberInput,
+  NumberInputField,
+  NumberIncrementStepper,
+  NumberDecrementStepper,
+  NumberInputStepper,
+  Container,
+  Button,
+  Select
+} from "@chakra-ui/react"
 import axios from "axios";
 
 export default function CreateExercise(props) {
@@ -37,8 +53,8 @@ export default function CreateExercise(props) {
   };
 
   const onChangeDuration = (e) => {
-    setDuration(e);
-  };
+    setDuration(e)
+  }
 
   const onChangeDate = (date) => {
     setDate(date);
@@ -68,13 +84,14 @@ export default function CreateExercise(props) {
   };
 
   return (
-    <div>
-      <h3>Create New Exercise Log</h3>
+    <Container maxW="1040px" mx="auto">
+      <Heading>Create New Exercise Log</Heading>
       <form onSubmit={onSubmit}>
         <div className="form-group">
           <label>Username: </label>
-          <select
-            required
+          <Select
+            isRequired
+            size="md"
             className="form-control"
             value={username}
             onChange={(e) => onChangeUsername(e.target.value)}
@@ -86,44 +103,58 @@ export default function CreateExercise(props) {
                 </option>
               );
             })}
-          </select>
+          </Select>
         </div>
         <div className="form-group">
-          <label>Description: </label>
-          <input
-            type="text"
-            required
-            className="form-control"
-            value={description}
-            onChange={(e) => onChangeDescription(e.target.value)}
-          />
-        </div>
-        <div className="form-group">
-          <label>Duration (in minutes): </label>
-          <input
-            type="text"
-            className="form-control"
-            value={duration}
-            onChange={(e) => onChangeDuration(e.target.value)}
-          />
-        </div>
-        <div className="form-group">
-          <label>Date: </label>
-          <div>
-            <DatePicker
-              selected={date}
-              onChange={(date) => onChangeDate(date)}
+          <FormControl id="desciption" isRequired>
+            <FormLabel>Description:</FormLabel>
+            <Input
+              value={description}
+              onChange={(e) => onChangeDescription(e.target.value)}
+              placeholder="Description"
             />
-          </div>
+          </FormControl>
         </div>
         <div className="form-group">
-          <input
-            type="submit"
-            value="Create Exercise Log"
-            className="btn btn-primary"
-          />
+          <FormControl id="duration" isRequired>
+            <FormLabel>Duration (in minutes):</FormLabel>
+            <NumberInput
+              size="md"
+              maxW={24}
+              type="number"
+              focusInputOnChange="true"
+              defaultvalue={10}
+              value={duration}
+              min={1}
+              onChange={onChangeDuration}>
+              <NumberInputField />
+              <NumberInputStepper>
+                <NumberIncrementStepper />
+                <NumberDecrementStepper />
+              </NumberInputStepper>
+            </NumberInput>
+          </FormControl>
+        </div>
+        <div>
+        </div>
+        <div className="form-group">
+          <FormControl id="date" isRequired>
+            <FormLabel>Duration (in minutes):</FormLabel>
+            <div>
+                <DatePicker
+                  size="md"
+                  selected={date}
+                  onChange={(date) => onChangeDate(date)}
+                />
+            </div>
+          </FormControl>
+        </div>
+        <div className="form-group">
+          <Button type="submit" colorScheme="teal" variant="outline" className="btn btn-primary">
+            Create Exercise Log
+          </Button>
         </div>
       </form>
-    </div>
+    </Container>
   );
 }
